@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="in.magamestheory.twonone">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +15,7 @@
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:label="@string/app_name" />
-        <provider android:authorities="com.facebook.app.FacebookContentProvider546089382220885"
+        <provider android:authorities="com.facebook.app.FacebookContentProvider161436047564228"
             android:name="com.facebook.FacebookContentProvider"
             android:exported="true" />
         <activity
