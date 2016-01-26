@@ -1,5 +1,8 @@
 package in.magamestheory.twonone;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,7 +15,7 @@ import android.view.MenuItem;
 
 import com.facebook.appevents.AppEventsLogger;
 
-public class MActivity extends AppCompatActivity {
+public class MActivity extends AppCompatActivity implements fragmnetInter{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class MActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        fragment_home();
     }
 
     private void startlog() {
@@ -59,4 +63,33 @@ public class MActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void fragmnet_selector(int a) {
+        Fragment fragment;
+        switch (a){
+            case 1:
+                fragment = new Intro();
+                break;
+            case 2:
+                fragment = new MActivityFragment();
+                break;
+            case  3:
+                fragment = new Scoreboard();
+                break;
+            default:
+                fragment = new Intro();
+        }
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.layout_main,fragment,"dfsdf");
+        fragmentTransaction.commit();
+    }
+    public void fragment_home(){
+        Fragment fragment = new Intro();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.layout_main,fragment,"dfsdf");
+        fragmentTransaction.commit();
+    }
 }

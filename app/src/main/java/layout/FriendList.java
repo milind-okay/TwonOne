@@ -36,6 +36,7 @@ public class FriendList extends ListFragment {
         Cursor rs = mydb.getMyData(1);
         rs.moveToFirst();
         jsondata = rs.getString(rs.getColumnIndex(DBHelper.ME));
+        Toast.makeText(getActivity().getApplicationContext(),"login error Try again",Toast.LENGTH_LONG).show();
         if(!rs.isClosed())
             rs.close();
         JSONArray friendslist;

@@ -9,4 +9,22 @@
     <TextView android:text="Hello World!" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:columnCount="7"
+        android:rowCount="7"
+        android:clickable="true"
+        android:background="#99f3f6"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:foreground="#f13a3a"
+        android:foregroundTint="#f9d317"
+        android:foregroundTintMode="src_atop"
+        android:orientation="horizontal"
+        android:textAlignment="center"
+        android:useDefaultMargins="true"></GridLayout>
+
 </RelativeLayout>
