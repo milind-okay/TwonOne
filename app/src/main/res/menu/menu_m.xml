@@ -1,6 +1,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+    <item android:id="@+id/action_about" android:title="@string/action_about"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_contactus" android:title="@string/action_contactus"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/statistics" android:title="@string/statistics"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item
+        android:id="@+id/help"
+        android:icon="@drawable/ic_help_outline_white_36dp"
+        android:title="@string/action_help"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/rate_us"
+        android:icon="@drawable/ic_stars_white_36dp"
+        android:title="@string/action_rateus"
+        app:showAsAction="ifRoom"/>
 </menu>

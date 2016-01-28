@@ -23,5 +23,13 @@
        android:layout_height="wrap_content">
 
    </LinearLayout>
+    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="server" android:id="@+id/button" android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" android:onClick="connect" android:layout_marginTop="148dp"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge" android:text="clientmess"
+        android:id="@+id/textView" android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"/>
+
 
 </RelativeLayout>

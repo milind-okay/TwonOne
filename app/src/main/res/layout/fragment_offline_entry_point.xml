@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_login"
+    tools:context="in.magamestheory.twonone.offlineEntryPoint"
+    android:padding="20dp">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/level"
+        android:layout_gravity="center_vertical"
+
+        android:background="#4c8ecc"
+        android:dropDownWidth="wrap_content"
+        android:dropDownSelector="#11cf14"
+        android:focusable="true"
+        android:gravity="center"
+        android:textColor ="#FFFFFF"
+
+        android:spinnerMode="dialog"
+
+
+        android:popupBackground="#0d5591"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play"
+        android:id="@+id/play"
+        android:background="@color/btn_login"
+        android:layout_marginBottom="105dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>

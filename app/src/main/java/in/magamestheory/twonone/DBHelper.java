@@ -15,13 +15,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "MilindTownOne.db";
     public static final String TABLE_NAME = "score";
     public static final String COLUMN_ID = "id";
-    public static final String FIRST_PLAYER = "first_player";
-    public static final String SECOND_PLAYER = "second_player";
-    public static final String FIRST_PLAYER_SCORE = "first_player_score";
-    public static final String SECOND_PLAYER_SCORE = "second_player_score";
-    public static final String TIES = "ties";
-    public static final String TURN = "turn";
-    public static final String PAIR = "pairno";
+    public static final String PLAYER = "first_player";
+    public static final String MSCORE = "mscore";
+
     public static final String FB_ID = "fb_id";
     public static final String ME = "playerName";
     public static final String FRIENDS_LIST = "friendList";
@@ -41,7 +37,7 @@ public class DBHelper extends SQLiteOpenHelper {
         );
         db.execSQL(
                 "create table player " +
-                        "(id integer primary key, playerName text,fb_id text,email text,friendlist text)"
+                        "(id integer primary key, playerName text,fb_id text,email text,friendlist text,mscore integer,gameboard text)"
         );
     }
 
@@ -163,7 +159,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 new String[] { Integer.toString(id) });
     }
 
-    public ArrayList<String> getAllCotacts()
+   /* public ArrayList<String> getAllCotacts()
     {
         ArrayList<String> array_list = new ArrayList<String>();
 
@@ -177,6 +173,6 @@ public class DBHelper extends SQLiteOpenHelper {
             res.moveToNext();
         }
         return array_list;
-    }
+    }*/
 }
 

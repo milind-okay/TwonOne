@@ -5,4 +5,43 @@
     <string name="facebook_app_id">161436047564228</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="replay">Replay</string>
+    <string name="new_game">New</string>
+    <string name="need_more_time">More Time?</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="action_rateus">Rate this App</string>
+    <string name="action_favorite">Favorite</string>
+    <string name="action_help">help</string>
+    <string name="action_about">help</string>
+    <string name="action_contactus">contact us</string>
+    <string name="statistics">Leader Board</string>
+    <string-array name="level_str">
+        <item>level 0</item>
+        <item>level 1</item>
+        <item>level 2</item>
+        <item>level 3</item>
+        <item>level 4</item>
+
+
+    </string-array>
+
+    <string name="details">Details</string>
+    <string name="game_details">Very Addictive Gameplay.Delete all the
+    numbers from the grid in minimum number of moves.\n
+    One move is defined as follows:\n
+    -Choose any 2 numbers, say X and Y, from the given grid such that X != Y (X not equal to Y), and remove them,or\n
+    -Choose any 1 number, say X, from the grid, and remove it.
+    Do it as fast as you can.Is it easy? Lets see!</string>
+        <string name="introString">
+    There are two modes in the game:</string>
+    <string name="offline_mode"> Offline mode:Here you will be facing yourself,
+           Find the minimum number of tasks
+           as fast as you can and make your highscore
+           to reach into the next high level.</string>
+    <string name="online_mode"> Online mode:Here you will play this game facing your facebook\n
+        friends as the competitors.Prove yourself best among them.the result will be broadcasted
+        to all the friends who are playing,
+        Sounds interesting is not t it? Yeah it is.</string>
+
+
 </resources>

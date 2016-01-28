@@ -6,4 +6,14 @@
     <color name="frame">#92b4b4</color>
     <color name="frame_solid">#e2efff</color>
     <color name="frame_background">#2cbcbc</color>
+    <color name="selected">#F29004</color>
+    <color name="unselected">#AFF3F0</color>
+    <color name="white">#FFFFFF</color>
+    <color name="input_login">#222222</color>
+    <color name="input_login_hint">#999999</color>
+    <color name="input_register">#888888</color>
+    <color name="input_register_bg">#3b4148</color>
+    <color name="input_register_hint">#5e6266</color>
+    <color name="bg_login">#26ae90</color>
+    <color name="btn_login">#26ae90</color>
 </resources>
