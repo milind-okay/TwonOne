@@ -1,7 +1,9 @@
 package in.magamestheory.twonone;
 
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,15 +15,18 @@ import android.widget.Button;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Intro extends Fragment {
+public class Intro extends Fragment implements View.OnClickListener{
     fragmnetInter comm;
-    private Button playonline,playoffline;
+    private Button playonline,playoffline,offlineMode,onlineMode,rules;
     public Intro() {
         // Required empty public constructor
     }
     public void init(){
         playoffline = (Button) getActivity().findViewById(R.id.playoffline);
         playonline = (Button)getActivity().findViewById(R.id.playonline);
+        offlineMode  = (Button)getActivity().findViewById(R.id.offlineMode);
+        onlineMode = (Button)getActivity().findViewById(R.id.onlineMode);
+        rules  = (Button)getActivity().findViewById(R.id.rules);
     }
 
     @Override
@@ -36,22 +41,48 @@ public class Intro extends Fragment {
         super.onActivityCreated(savedInstanceState);
         init();
         comm = (fragmnetInter) getActivity();
-        playoffline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                comm.fragmnet_selector(2);
-            }
-        });
-        playonline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startOnlineActivity();
-            }
-        });
+        playoffline.setOnClickListener(this);
+        playonline.setOnClickListener(this);
+        onlineMode.setOnClickListener(this);
+        offlineMode.setOnClickListener(this);
+        rules.setOnClickListener(this);
+
     }
 
     private void startOnlineActivity() {
         Intent intent =  new Intent(getActivity().getApplicationContext(), OnlinePlayLog.class);
         startActivity(intent);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.rules:
+                showDialog("Rules", R.string.game_details, true);
+                break;
+            case R.id.offlineMode:
+                showDialog("Offline Mode", R.string.offline_mode, true);
+                break;
+            case R.id.onlineMode:
+                showDialog("Online Mode", R.string.online_mode, true);
+                break;
+            case R.id.playoffline:
+                comm.fragment_selector(2);
+                break;
+            case R.id.playonline:
+                startOnlineActivity();
+                break;
+        }
+    }
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public void showDialog(String title,int sms,boolean iconType){
+        GameAlert gameAlert= new GameAlert();
+        gameAlert.setM(title,sms, iconType,false);
+        gameAlert.show(getActivity().getFragmentManager(), "Intro");
+    }
+
+    private void showRule() {
+        
     }
 }

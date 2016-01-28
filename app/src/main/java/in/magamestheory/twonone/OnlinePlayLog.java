@@ -1,12 +1,17 @@
 package in.magamestheory.twonone;;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -29,15 +34,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.Arrays;
 
 import layout.FriendList;
 
-public class OnlinePlayLog extends AppCompatActivity {
+public class OnlinePlayLog extends AppCompatActivity implements DataDisplay{
     protected AccessTokenTracker accessTokenTracker;
     protected ProfileTracker profileTracker;
     CallbackManager callbackManager;
     private  DBHelper mydb;
+    TextView serverMessage;
+    Thread m_objThreadClient;
+    Socket clientSocket;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +67,11 @@ public class OnlinePlayLog extends AppCompatActivity {
 
             }
         };
+        serverMessage=(TextView)findViewById(R.id.textView);
         accessTokenTracker.startTracking();
         profileTracker.startTracking();
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("user_friends","email");
+       // loginButton.setReadPermissions("user_friends");
         getLoginDetails(loginButton);
 
     }
@@ -75,8 +87,10 @@ public class OnlinePlayLog extends AppCompatActivity {
             public void onSuccess(LoginResult login_result) {
                 AccessToken accessToken = login_result.getAccessToken();
                 Profile profile = Profile.getCurrentProfile();
-                if(profile != null)
-                mydb.insertContact(profile.getName(), profile.getId(), profile.getMiddleName());
+                if (profile != null)
+                    mydb.insertContact(profile.getName(), profile.getId(), profile.getMiddleName());
+                else
+                    Toast.makeText(getApplicationContext(), "login error Try again", Toast.LENGTH_LONG).show();
                 GraphRequestAsyncTask graphRequestAsyncTask = new GraphRequest(
                         login_result.getAccessToken(),
                         //AccessToken.getCurrentAccessToken(),
@@ -138,7 +152,13 @@ public class OnlinePlayLog extends AppCompatActivity {
         super.onResume();
 
         // Logs 'install' and 'app activate' App Events.
-        AppEventsLogger.activateApp(this);
+       // AppEventsLogger.activateApp(this);
+        Profile profile = Profile.getCurrentProfile();
+        if(profile != null)
+            mydb.insertContact(profile.getName(), profile.getId(), profile.getMiddleName());
+        else
+            Toast.makeText(getApplicationContext(),"login error Try again",Toast.LENGTH_LONG).show();
+
     }
 
     @Override
@@ -146,7 +166,8 @@ public class OnlinePlayLog extends AppCompatActivity {
         super.onPause();
 
         // Logs 'app deactivate' App Event.
-        AppEventsLogger.deactivateApp(this);
+       // AppEventsLogger.deactivateApp(this);
+
     }
 
     @Override
@@ -155,5 +176,58 @@ public class OnlinePlayLog extends AppCompatActivity {
         profileTracker.startTracking();
         super.onStop();
 
+    }
+    public void connect(View view)
+    {
+        MyServer server= new MyServer();
+        server.setEventListener(this);
+        server.startListening();
+
+    }
+
+    @Override
+    public void Display(String message) {
+        serverMessage.setText("" + message);
+    }
+    ////////
+    public void Start(View view)
+    {
+        m_objThreadClient=new Thread(new Runnable() {
+            public void run()
+            {
+                try
+                {
+                    clientSocket= new Socket("127.0.0.1",2001);
+                    ObjectOutputStream oos = new ObjectOutputStream(clientSocket.getOutputStream());
+                    oos.writeObject("Hellow there");
+                    Message serverMessage= Message.obtain();
+                    ObjectInputStream ois =new ObjectInputStream(clientSocket.getInputStream());
+                    String strMessage = (String)ois.readObject();
+                    serverMessage.obj=strMessage;
+                    mHandler.sendMessage(serverMessage);
+                    oos.close();
+                    ois.close();
+                }
+                catch (Exception e)
+                {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        m_objThreadClient.start();
+
+    }
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            messageDisplay(msg.obj.toString());
+        }
+    };
+    public void messageDisplay(String servermessage)
+    {
+        serverMessage.setText(""+servermessage);
     }
 }

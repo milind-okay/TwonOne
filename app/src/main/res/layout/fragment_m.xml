@@ -3,28 +3,100 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:showIn="@layout/activity_m"
-    tools:context=".MActivityFragment">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/gradient"
+    tools:context=".MActivityFragment"
+    >
+    <TextView
+        android:id="@+id/timerheater"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="Time Left : " android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:id="@+id/timer"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="0" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/grid_view"
+        android:layout_alignEnd="@+id/grid_view"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/timerheater"
+        android:layout_toEndOf="@+id/timerheater" />
 
-    <TextView android:text="Hello World!" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:columnCount="7"
-        android:rowCount="7"
-        android:clickable="true"
-        android:background="#99f3f6"
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/grid_view"
+        android:layout_below="@id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numColumns="auto_fit"
+        android:horizontalSpacing="1dp"
+        android:verticalSpacing="3dp"
+        android:gravity="center"
+        android:stretchMode="columnWidth"
+        android:layout_marginBottom="120dp"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:drawSelectorOnTop="true"
         android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:foreground="#f13a3a"
-        android:foregroundTint="#f9d317"
-        android:foregroundTintMode="src_atop"
-        android:orientation="horizontal"
-        android:textAlignment="center"
-        android:useDefaultMargins="true"></GridLayout>
+        android:clickable="true"
+
+        android:columnWidth="60dp">
+
+    </GridView>
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:id="@+id/button_delete"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/button_layout" />
+<LinearLayout
+    android:id="@+id/button_layout"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="80"
+    android:layout_alignParentBottom="true">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Moves : "
+        android:gravity="center"
+        android:layout_weight="20"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:gravity="center"
+        android:id="@+id/button_move"
+        android:layout_weight="20"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Score : "
+        android:gravity="center"
+        android:layout_weight="20"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:gravity="center"
+        android:id="@+id/button_score"
+        android:layout_weight="20"/>
+</LinearLayout>
+
 
 </RelativeLayout>
