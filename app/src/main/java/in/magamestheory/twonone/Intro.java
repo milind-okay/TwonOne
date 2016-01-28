@@ -50,8 +50,12 @@ public class Intro extends Fragment implements View.OnClickListener{
     }
 
     private void startOnlineActivity() {
-        Intent intent =  new Intent(getActivity().getApplicationContext(), OnlinePlayLog.class);
+        Bundle dataBundle = new Bundle();
+        dataBundle.putInt("id", 1);
+        Intent intent =  new Intent(getActivity().getApplicationContext(), OnlineLog.class);
+        intent.putExtras(dataBundle);
         startActivity(intent);
+
     }
 
 

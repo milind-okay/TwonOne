@@ -23,7 +23,7 @@ import in.magamestheory.twonone.DBHelper;
 import in.magamestheory.twonone.R;
 
 /**
- * Created by milind on 18/1/16.
+ * Created by milind on 26/1/16.
  */
 public class FriendList extends ListFragment {
     private List<ListViewItem> mItems;        // ListView items list

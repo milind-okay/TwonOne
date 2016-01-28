@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="in.magamestheory.twonone">
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -15,9 +19,10 @@
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:label="@string/app_name" />
-        <provider android:authorities="com.facebook.app.FacebookContentProvider161436047564228"
+        <provider android:authorities="com.facebook.app.FacebookContentProvider546089382220885"
             android:name="com.facebook.FacebookContentProvider"
             android:exported="true" />
+
         <activity
             android:name=".MActivity"
             android:label="@string/app_name"
@@ -28,7 +33,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OnlinePlayLog"></activity>
+        <activity android:name=".OnlinePlayLog" />
+        <activity
+            android:name=".OnlineLog"
+            android:label="@string/title_activity_online_log"
+            android:parentActivityName=".MActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.magamestheory.twonone.MActivity" />
+        </activity>
+
     </application>
 
 </manifest>

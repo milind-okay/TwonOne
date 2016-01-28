@@ -2,7 +2,8 @@
     <string name="app_name">Two n One</string>
     <string name="action_settings">Settings</string>
 
-    <string name="facebook_app_id">161436047564228</string>
+    <!-- <string name="facebook_app_id">161436047564228</string>-->
+    <string name="facebook_app_id">546089382220885</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="replay">Replay</string>
@@ -12,7 +13,7 @@
     <string name="action_rateus">Rate this App</string>
     <string name="action_favorite">Favorite</string>
     <string name="action_help">help</string>
-    <string name="action_about">help</string>
+    <string name="action_about">About</string>
     <string name="action_contactus">contact us</string>
     <string name="statistics">Leader Board</string>
     <string-array name="level_str">
@@ -42,6 +43,7 @@
         friends as the competitors.Prove yourself best among them.the result will be broadcasted
         to all the friends who are playing,
         Sounds interesting is not t it? Yeah it is.</string>
+    <string name="title_activity_online_log">OnlineLog</string>
 
 
 </resources>
