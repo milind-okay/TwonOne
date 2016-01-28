@@ -19,22 +19,24 @@ import android.widget.Toast;
 import com.facebook.appevents.AppEventsLogger;
 
 public class MActivity extends AppCompatActivity implements fragmnetInter,DialogComm{
-    int fragment_id = 1,backPress = 0,level = 1;
+    int fragment_id = 1,backPress = 0,level = 1,id_To;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_m);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Bundle extras = getIntent().getExtras();
+        if(extras!=null) {
+            id_To = extras.getInt("fId");
 
-
-        fragment_home();
+            fragment_selector(id_To);
+        }else {
+            fragment_home();
+        }
     }
 
-    private void startlog() {
-        Intent login = new Intent(this, OnlinePlayLog.class);
-        startActivity(login);
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -49,7 +51,7 @@ public class MActivity extends AppCompatActivity implements fragmnetInter,Dialog
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
-            fragment_selector(3);
+            fragment_selector(5);
             return true;
         }else if(id == R.id.help){
             showHelp();
@@ -58,7 +60,7 @@ public class MActivity extends AppCompatActivity implements fragmnetInter,Dialog
             rate_us();
             return true;
         }else if(id == R.id.statistics){
-            fragment_selector(4);
+            fragment_selector(3);
             return true;
         }else if(id == R.id.action_contactus){
             sendEmail();
@@ -83,11 +85,15 @@ public class MActivity extends AppCompatActivity implements fragmnetInter,Dialog
                ;
                 break;
             case  3:
-                fragment = new Scoreboard();
+                fragment = new layout.ListScore();
                 frag_tag = "scoreboard";
                 break;
             case 4:
                 fragment = MActivityFragment.newInstance(level);
+                frag_tag = "Mfrag";
+                break;
+            case 5:
+                fragment = new layout.AboutUs();
                 frag_tag = "Mfrag";
                 break;
             default:

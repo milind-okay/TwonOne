@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -27,7 +28,7 @@ public class MActivityFragment extends Fragment implements View.OnClickListener 
     private static final String ARG_PARAM1 = "gridSize";
     private static final String ARG_PARAM2 = "param2";
     private Button mdelete,mscore,movesCount;
-    private TextView mclock;
+    private TextView mclock,maxScoreText;
     String strRow[];
     boolean gameState[];
     int boardSize,numscore,nummovecount,numSelected = 0,colWidth,time;
@@ -35,6 +36,7 @@ public class MActivityFragment extends Fragment implements View.OnClickListener 
     View selectedView[];
     MyCount counter;
     GridView gridview;
+    private DBHelper mydb;
     ImageAdapter imageAdapter;
     public MActivityFragment() {
         selectedP = new int[2];
@@ -63,6 +65,7 @@ public class MActivityFragment extends Fragment implements View.OnClickListener 
             //Toast.makeText(getActivity().getApplicationContext(), String.format("%d",colWidth), Toast.LENGTH_SHORT).show();
             //mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        mydb = new DBHelper(getActivity());
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -139,14 +142,20 @@ public class MActivityFragment extends Fragment implements View.OnClickListener 
         mscore = (Button)getActivity().findViewById(R.id.button_score);
         movesCount = (Button)getActivity().findViewById(R.id.button_move);
         mclock = (TextView)getActivity().findViewById(R.id.timer);
+        maxScoreText = (TextView)getActivity().findViewById(R.id.maxscore);
         strRow = new String[boardSize];
         gameState = new boolean[boardSize];
-
+        String str = "";
+        Cursor rs = mydb.getMyData(1);
+        rs.moveToFirst();
+        str = rs.getString(rs.getColumnIndex(DBHelper.GAMEBOARD));
+        maxScoreText.setText(String.format("%d",rs.getInt(rs.getColumnIndex(DBHelper.MSCORE))));
+        if(!rs.isClosed())rs.close();
         selectedView[0] = null;
         selectedView[1] = null;
         GameBoxValue = new int [boardSize];
         setSelectedP();
-        genrateArray(boardSize);
+        setArray(boardSize,str);
         initgameState(boardSize);
         //colWidth = 7;
 
@@ -171,7 +180,7 @@ public class MActivityFragment extends Fragment implements View.OnClickListener 
 
         @Override
         public void onTick(long millisUntilFinished) {
-            mclock.setText(String.format("%d",millisUntilFinished/1000));
+            mclock.setText(String.format("%d",millisUntilFinished/1000) + " s");
 
         }
 
@@ -205,12 +214,22 @@ public class MActivityFragment extends Fragment implements View.OnClickListener 
 
     }
     public void checkResult(){
+        int maxScore;
         if(nummovecount == GetOptimalValue()){
-           showDialog("Congo You Do It !\n Total Move " + nummovecount+ "\nYour Score : " + numscore + colWidth*100, true);
+            maxScore =  numscore + colWidth * 100;
+           showDialog("Congo You Do It !\n Total Move " + nummovecount + "\nYour Score : " + maxScore, true);
+
         }else{
+            maxScore = numscore;
             showDialog("Ohh You miss it.\n Total Move by you " + nummovecount + "\n Required : " + GetOptimalValue()
                     + "\nYour Score : " + numscore, false);
         }
+        Cursor rs = mydb.getMyData(1);
+        rs.moveToFirst();
+       if(maxScore > rs.getInt(rs.getColumnIndex(DBHelper.MSCORE))){
+           mydb.updateScore(1,maxScore,"");
+       }
+        if(!rs.isClosed()) rs.close();
     }
     public int GetOptimalValue() {
         int n=boardSize;
@@ -269,6 +288,14 @@ public class MActivityFragment extends Fragment implements View.OnClickListener 
 
         }
     }
+    private void setArray(int a,String str){
+
+        for(int i=0;i<a;i++){
+
+            GameBoxValue[i] = str.charAt(i) - '0';
+
+        }
+    }
     private void initgameState(int boardSize) {
         for(int i=0;i<boardSize;i++){
 
@@ -290,6 +317,10 @@ public class MActivityFragment extends Fragment implements View.OnClickListener 
         selectedView[1] = null;
         initgameState(boardSize);
         time = colWidth*20;
+        Cursor rs = mydb.getMyData(1);
+        rs.moveToFirst();
+        maxScoreText.setText(String.format("%d",rs.getInt(rs.getColumnIndex(DBHelper.MSCORE))));
+        if(!rs.isClosed())rs.close();
 
 
     }

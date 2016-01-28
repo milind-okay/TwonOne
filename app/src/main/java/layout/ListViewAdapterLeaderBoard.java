@@ -8,18 +8,18 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import in.magamestheory.twonone.DBHelper;
 import java.util.List;
 
 import in.magamestheory.twonone.R;
 
 /**
- * Created by milind on 26/1/16.
+ * Created by milind on 28/1/16.
  */
-public class ListViewAdapter extends ArrayAdapter<ListViewItem> {
 
-    public ListViewAdapter(Context context, List<ListViewItem> items) {
-        super(context, R.layout.fragment_friend_list, items);
+public class ListViewAdapterLeaderBoard extends ArrayAdapter<ListViewItem> {
+
+    public ListViewAdapterLeaderBoard(Context context, List<ListViewItem> items) {
+        super(context, R.layout.fragment_scoreboard, items);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class ListViewAdapter extends ArrayAdapter<ListViewItem> {
         if(convertView == null) {
             // inflate the GridView item layout
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.fragment_friend_list, parent, false);
+            convertView = inflater.inflate(R.layout.fragment_scoreboard, parent, false);
 
             // initialize the view holder
             viewHolder = new ViewHolder();
