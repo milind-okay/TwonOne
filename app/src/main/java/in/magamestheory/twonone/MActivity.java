@@ -6,17 +6,13 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.facebook.appevents.AppEventsLogger;
 
 public class MActivity extends AppCompatActivity implements fragmnetInter,DialogComm{
     int fragment_id = 1,backPress = 0,level = 1,id_To;

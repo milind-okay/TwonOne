@@ -2,10 +2,10 @@ package in.magamestheory.twonone;
 
 
 import android.annotation.TargetApi;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,8 +52,8 @@ public class Intro extends Fragment implements View.OnClickListener{
     private void startOnlineActivity() {
         Bundle dataBundle = new Bundle();
         dataBundle.putInt("id", 1);
-        Intent intent =  new Intent(getActivity().getApplicationContext(), OnlineLog.class);
-        intent.putExtras(dataBundle);
+        Intent intent =  new Intent(getActivity().getApplicationContext(),GCMActivity.class);
+        //intent.putExtras(dataBundle);
         startActivity(intent);
 
     }
